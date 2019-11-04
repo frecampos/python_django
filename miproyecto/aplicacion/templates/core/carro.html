@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block titulo %}
+   Listado Carro
+{% endblock titulo %}
+
+{% block contenido %}
+    <table>
+        <tr>
+            <td>id</td>
+            <td>titulo</td>
+            <td>duracion</td>
+            <td>anio</td>
+        </tr>
+        {% for p in listado %}            
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.nombre}}</td>
+            <td>{{p.duracion}}</td>
+            <td>{{p.anio}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock contenido %}

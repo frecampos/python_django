@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block contenedor %}
+    <h1>modificar pelicula</h1>
+
+  <form action="" method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+      <table>
+            {{form.as_table }}
+      </table>
+      <input type="reset" value="Limpiar">
+      <input type="submit" value="Modificar">
+
+  </form>
+  {{mensaje}}
+{% endblock contenedor %}

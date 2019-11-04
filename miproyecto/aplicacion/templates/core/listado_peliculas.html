@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="{% static 'core/js/confirmacion.js' %}"></script>
+{% endblock js %}
+{% block contenedor %}
+    <h1>Listado de peliculas</h1>
+    <table class='table table-striped'>
+        <tr>
+            <td>Nombre</td>
+            <td>Duracion</td>
+            <td>Anio</td>
+            <td>Genero</td>
+            <td>Modificar</td>
+            <td>Eliminar</td>
+            <td>Agregar</td>
+        </tr>
+        {% for p in peliculas %}                
+        <tr>
+            <td>{{p.nombre}}</td>
+            <td>{{p.duracion}}</td>
+            <td>{{p.anio}}</td>
+            <td>{{p.genero}}</td>
+            <td>
+                <a href="{% url 'MODIFICARPELICULA' p.id %}">Modificar</a>
+            </td>
+            <td>
+                <a href="#" onclick="confirmarEliminacion({{ p.id }})">Eliminar</a>
+            </td>
+            <td>
+                <a href="{% url 'AGREGARCARRO' p.id %}">Agregar</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock contenedor %}

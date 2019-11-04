@@ -1,0 +1,180 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% block js %}
+
+    {% endblock %}
+    {% block css %}
+
+    {% endblock %}
+    <title>
+        {% block titulo %}
+
+        {% endblock %}
+
+    </title>
+</head>
+
+<body style="background-image: url('{% static 'core/img/fondo-claro.jpg'%}')">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'core/img/icono.png' %}" width="100" height="100" class="d-inline-block align-top"
+                    alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-wrench"></i> Nuestros Servicios</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Quienes Somos </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'REGISTRO' %}"><i class="fas fa-sign-in-alt"></i> Registrar
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'social:begin' 'facebook' %}"><i class="fas fa-sign-in-alt"></i> Facebook Logins
+                        </a>
+                    </li>
+
+
+                    <!-- verifica que el usuario no es autentificado -->
+                    {% if request.user.is_authenticated == True and request.user.is_staff == False %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Galeria </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Comprar Ticket </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Ofertas </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Mercaderia </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'NUEVAPELICULA' %}"><i class="fas fa-sign-in-alt"></i> Nueva Pelicula </a>
+                    </li>
+                    {% endif %}
+                    <!-- designa si el usuario es administrador -->
+                    {% if request.user.is_staff == True %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'NUEVAPELICULA' %}"><i class="fas fa-sign-in-alt"></i> Registrar Pelicula</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'LISTADO' %}"><i class="fas fa-sign-in-alt"></i> Listado
+                            Peliculas</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Registrar Generos </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""><i class="fas fa-sign-in-alt"></i> Eliminar Usuarios </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'LISTADOCARRO' %}"><i class="fas fa-sign-in-alt"></i> Listado Carro </a>
+                    </li>
+
+                    {% endif %}
+                    <!-- designa si el usuario esta autentificado -->
+                   
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'SALIR' %}"><i class="fas fa-sign-in-alt"></i> Logout {{user.username }}</a>
+                    </li>                    
+                    <li class="nav-item active">
+                        <a class="nav-link"><i class="fas fa-sign-in-alt"></i>Bienvenido {{msg}}</a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="barra">
+
+    </div>
+    <div class="container">
+        {% block contenedor %}
+
+        {% endblock %}
+    </div>
+
+    <footer>
+        <div id="footer">
+
+        </div>
+    </footer>
+
+
+    <style>
+        #pie {
+            position: relative;
+            height: 10%;
+            width: 50%;
+
+        }
+
+        #pie2 {
+            position: relative;
+            height: 5px;
+            font-size: 15px;
+        }
+    </style>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img id="pie" src="{% static 'core/img/2.png' %}" width="60%" height="80" class="d-inline-block align-top"
+                alt="">
+        </a>
+        <center>
+            <a id="pie2" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Agencia de Mantenimiento y Reparación de ascensores
+            </a>
+            <br>
+            <a id="pie2" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Horarios: Lun - Vi: 8:00 - 21:00 / Sab: 12:00 - 18:00
+            </a>
+            <br>
+            <a id="pie2" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Para mayor información contactarse a: (2) 233 456 6788 - (2) 233 479 0345
+            </a>
+            <hr>
+            <a id="pie2" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Av. Siempre Viva, Calle Falsa #123 - Puente Alto - Santiago - Chile
+            </a>
+        </center>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
